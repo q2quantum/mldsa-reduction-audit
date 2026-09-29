@@ -80,10 +80,49 @@ worse than no checker:
 ## Availability
 
 The auditor runs locally: audited source is never copied to us — you point it
-at your own checkout, and your code never leaves your machine. The tool is
-available on request while we finish preparing it for public release.
+at your own checkout, and your code never leaves your machine. The code in
+this repository is what we run ourselves; nothing is held back.
+
+```bash
+pip install -r pqc_reduction_audit/requirements.txt
+
+python3 -m pqc_reduction_audit.cli \
+    --task task.json \
+    --out-dir out/
+```
+
+`task.json` names the library, the version, the target file/function, and
+which profile in `pqc_reduction_audit/profiles/` to use (`profiles/*.json` —
+one per codebase we have audited; adding a new target is a new profile file,
+not a code change, unless the reduction check is fused into the arithmetic
+primitive itself — see OpenSSL 3.5 above).
+
+Before every run against a new profile, the tool reproduces a known answer
+against a pinned wolfSSL revision with a documented, committed defect; a
+mismatch there aborts the run instead of reporting on an untrusted build of
+the tool itself:
+
+```bash
+bash pqc_reduction_audit/run_known_answer.sh
+```
 
 Reading the method in detail: [METHOD.md](METHOD.md).
+
+## Verification document for a recipient
+
+`tools/generate_verification_document.py` turns one run's `result.json` into
+the seven-section document we send to a library maintainer or a
+certification lab — what was checked, how, the findings table, what the
+finding means for that library, what we do not claim, how to reproduce it,
+and contact information. Nothing in this repository sends that document
+anywhere; the script only writes a file.
+
+```bash
+python3 tools/generate_verification_document.py \
+    --result out/<run_label>.json \
+    --tool-link github.com/q2quantum/mldsa-reduction-audit \
+    --output document.md
+```
 
 ## Who we are
 
@@ -96,5 +135,7 @@ Contact: q2quantum.app@gmail.com
 ## License
 
 The text in this repository (this README and METHOD.md) is licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Code, when it is
-added here, will be released under the Apache License 2.0.
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — see [LICENSE](LICENSE).
+Code (`pqc_reduction_audit/`, `tools/`) is licensed under the Apache License
+2.0 — see [LICENSE-CODE](LICENSE-CODE). Audited target source is never
+vendored here under either license — see "Availability" above.
