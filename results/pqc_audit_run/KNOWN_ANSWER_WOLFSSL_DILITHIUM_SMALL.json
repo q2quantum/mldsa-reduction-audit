@@ -1,0 +1,52 @@
+{
+  "target_file": "wolfcrypt/src/dilithium.c",
+  "function": "dilithium_sign_with_seed_mu",
+  "target_version": {
+    "sha256": "23221ed36be38631f64a6d0b42e14a05103d16fd731c2a62050625927f835355",
+    "git_tag": "v5.9.0-stable",
+    "git_commit": "922d04b3568c6428a9fb905ddee3ef5a68db3108",
+    "git_dirty": false
+  },
+  "sites": [
+    {
+      "check_call_line": 8354,
+      "last_arith_op": "dilithium_sub",
+      "last_arith_line": 8351,
+      "reduce_present_in_source": false,
+      "label": "w0 = w - cs2 (Step 22, FIPS 204 Algorithm 2)",
+      "verdict": "sat",
+      "is_defect": true,
+      "witness": {
+        "a": -8380416,
+        "check_low_raw": false,
+        "check_low_reduced": true,
+        "reduced_value": 1
+      }
+    },
+    {
+      "check_call_line": 8367,
+      "last_arith_op": "dilithium_add",
+      "last_arith_line": 8364,
+      "reduce_present_in_source": true,
+      "label": "z = y + cs1 (Step 21, FIPS 204 Algorithm 2)",
+      "verdict": "not_evaluated (reduce present in source)",
+      "is_defect": false,
+      "witness": null
+    },
+    {
+      "check_call_line": 8377,
+      "last_arith_op": "dilithium_invntt",
+      "last_arith_line": 8374,
+      "reduce_present_in_source": false,
+      "label": "ct0 = NTT-1(c o t0) (Step 25/27, FIPS 204 Algorithm 2)",
+      "verdict": "sat",
+      "is_defect": true,
+      "witness": {
+        "a": -8380416,
+        "check_low_raw": false,
+        "check_low_reduced": true,
+        "reduced_value": 1
+      }
+    }
+  ]
+}

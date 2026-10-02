@@ -1,0 +1,23 @@
+{
+  "language": "cpp",
+  "match_mode": "suffix",
+  "functions": {
+    "arith": ["polyveck_sub", "polyvecl_add",
+              "polyveck_invntt_tomont", "polyvecl_invntt_tomont",
+              "polyveck_pointwise_poly_montgomery",
+              "polyvecl_pointwise_poly_montgomery"],
+    "reduce": ["polyveck_reduce", "polyvecl_reduce"],
+    "check": ["polyveck_chknorm", "polyvecl_chknorm"]
+  },
+  "site_labels": {
+    "w0":  {"label": "w0 = w - cs2 (Step 22, FIPS 204 Algorithm 2)", "hi": 95154},
+    "z":   {"label": "z = y + cs1 (Step 21, FIPS 204 Algorithm 2)", "hi": 130994},
+    "ct0": {"label": "ct0 = NTT-1(c o t0) (Step 25/27, FIPS 204 Algorithm 2)", "hi": 95232}
+  },
+  "site_order": {
+    "default": ["z", "w0", "ct0"],
+    "by_function": {
+      "mldsa_sign_internal_44": ["z", "w0", "ct0"]
+    }
+  }
+}
