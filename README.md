@@ -128,7 +128,7 @@ python3 tools/generate_verification_document.py \
 
 Q² quantum ecosystem — an independent team in Tbilisi, Georgia, mapping
 the quantum technology sector and building products on top of that map. This
-auditor is the first of them.
+auditor is an open prototype from that work.
 
 Contact: q2quantum.app@gmail.com
 
