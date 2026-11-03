@@ -79,6 +79,24 @@ worse than no checker:
 
 ## Availability
 
+### Supported environment
+
+The reproducible quick start is supported on **Ubuntu Linux with Python 3.11**,
+using the exact dependencies in `pqc_reduction_audit/requirements.txt`:
+`z3-solver==5.3.1.0` and `libclang==18.1.1`. The
+[clean-machine check](https://github.com/q2quantum/mldsa-reduction-audit/actions/workflows/clean_machine_check.yml)
+runs the commands below on a fresh Ubuntu runner.
+
+**macOS is not currently supported.** On Darwin 23.1 with Python 3.9.6 and
+libclang 18.1.1, the full AST audit has been reported to stop with
+`Unknown template argument kind 437` (with both Z3 5.3.1.0 and 5.3.3.0).
+Pinning Z3 fixes reference-witness reproducibility, but does not resolve this
+separate parser failure. Other macOS/Python combinations have not been verified.
+Use the Linux environment above for the full audit; Windows full-audit support
+has not been established by this check either.
+
+### Quick start
+
 The auditor runs locally: audited source is never copied to us — you point it
 at your own checkout, and your code never leaves your machine. The code in
 this repository is what we run ourselves; nothing is held back.
